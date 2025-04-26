@@ -11,8 +11,9 @@ dotenv.config();
 const app = express();
 app.use(bodyParser.json());
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://monumental-brioche-32a6b5.netlify.app/']
-  }));
+    origin: ['http://localhost:3000', 'https://monumental-brioche-32a6b5.netlify.app']
+}));
+
 
 const PORT = process.env.PORT || 7000; 
 const MONGO_URL = process.env.MONGO_URL;  // Make sure you have this in your .env
