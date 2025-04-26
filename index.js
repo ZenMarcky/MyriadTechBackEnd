@@ -11,7 +11,7 @@ dotenv.config();
 const app = express();
 app.use(bodyParser.json());
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://myriadtechhub.netlify.app']
+    origin: ['http://localhost:3000', 'https://myriadtechhub.store']
 }));
 
 
