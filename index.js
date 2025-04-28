@@ -33,6 +33,30 @@ mongoose.connect(MONGO_URL, {
     console.log("Error connecting to MongoDB: ", err);
   });
 
+
+
+// After connecting to MongoDB:
+mongoose.connection.once('open', async () => {
+  console.log('MongoDB connected');
+
+  try {
+    await mongoose.connection.db.admin().ping();
+    console.log('MongoDB is awake');
+  } catch (error) {
+    console.error('Failed to ping MongoDB on startup:', error);
+  }
+
+  // Keep-alive ping every 5 minutes
+  setInterval(async () => {
+    try {
+      await mongoose.connection.db.admin().ping();
+      // No console log if successful (silent)
+    } catch (error) {
+      console.error('MongoDB keep-alive ping failed:', error);
+    }
+  }, 5 * 60 * 1000); // 5 minutes
+});
+
 // Use your routes
 app.use("/api", route);
 
